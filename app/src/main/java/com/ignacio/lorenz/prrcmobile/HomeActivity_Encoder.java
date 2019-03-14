@@ -54,7 +54,7 @@ public class HomeActivity_Encoder extends AppCompatActivity implements Navigatio
 
             case R.id.nav_InTran_Encoder:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_encoder,
-                        new InTransit()).commit();
+                        new InActive()).commit();
                 break;
 
             case R.id.nav_Archive_Encoder:

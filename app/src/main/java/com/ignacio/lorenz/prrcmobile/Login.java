@@ -6,15 +6,20 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.app.AlertDialog;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kosalgeek.asynctask.AsyncResponse;
 import com.kosalgeek.asynctask.PostResponseAsyncTask;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 
 public class Login extends AppCompatActivity {
 
@@ -47,13 +52,24 @@ public class Login extends AppCompatActivity {
                         new PostResponseAsyncTask(Login.this, postData, new AsyncResponse() {
                             @Override
                             public void processFinish(String output) {
-                                if(output.equals("success")){
+                                if(output != null) {
+                                    Type listType = new TypeToken<List<User>>() {
+                                    }.getType();
+                                    List<User> userList = new Gson().fromJson(output, listType);
                                     SharedPreferences.Editor editor = sp.edit();
-                                    editor.putString("username", et_username.getText().toString());
-                                    editor.apply();
+
+                                    for (User user : userList) {
+                                        Log.d("TEST", user.id);
+                                        Log.d("TEST", user.role);
+
+                                        editor.putString("id", user.id);
+                                        editor.putString("role", user.role);
+                                        editor.apply();
+                                    }
+
                                     Intent intent = new Intent(Login.this, HomeActivity_SuperAdmin.class);
                                     startActivity(intent);
-                                    /*Toast.makeText(Login.this, "Login Successfully", Toast.LENGTH_LONG).show();*/
+
                                 }else if (et_username.equals("") || et_password.equals("")) {
                                     AlertDialog alertDialog = new AlertDialog.Builder(Login.this).create();
                                     alertDialog.setTitle("ALERT!");

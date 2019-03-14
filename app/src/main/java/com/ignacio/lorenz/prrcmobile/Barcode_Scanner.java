@@ -17,6 +17,7 @@ public class Barcode_Scanner extends AppCompatActivity implements BarcodeReader.
 
     @Override
     public void onScanned(Barcode barcode) {
+
         // single barcode scanned
     }
 
