@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context=".Archive">
+    tools:context=".Accepted">
 
     <ListView
         android:id="@+id/listView"

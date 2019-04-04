@@ -14,14 +14,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class HomeActivity_SuperAdmin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer_super_admin;
     SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.side_bar_super_admin);
+        setContentView(R.layout.side_bar);
 
         sp = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -34,18 +34,25 @@ public class HomeActivity_SuperAdmin extends AppCompatActivity implements Naviga
 
         Menu menu = navigationView.getMenu();
         switch(sp.getString("role", "")){
-            case "Approver":
-
+            case "Admin":
+                MenuItem ad = menu.findItem(R.id.nav_Accepted);
+                ad.setVisible(false);
+                break;
+            case "Encoder":
+                MenuItem ea = menu.findItem(R.id.nav_Accepted);
+                ea.setVisible(false);
                 break;
             case "Viewer":
-                MenuItem target = menu.findItem(R.id.nav_MyDocu_Super_Admin);
-                target.setVisible(false);
+                MenuItem v1 = menu.findItem(R.id.nav_MyDocu);
+                v1.setVisible(false);
+                MenuItem v2 = menu.findItem(R.id.nav_Accepted);
+                v2.setVisible(false);
                 break;
-            default:
+            case "Approver":
+                MenuItem a = menu.findItem(R.id.nav_MyDocu);
+                a.setVisible(false);
                 break;
         }
-
-
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer_super_admin, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -53,46 +60,55 @@ public class HomeActivity_SuperAdmin extends AppCompatActivity implements Naviga
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_super_admin,
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new AllDocument()).commit();
-            navigationView.setCheckedItem(R.id.nav_AllDocu_Super_Admin);
+            navigationView.setCheckedItem(R.id.nav_AllDocu);
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_AllDocu_Super_Admin:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_super_admin,
+            case R.id.nav_AllDocu:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AllDocument()).commit();
                 break;
 
-            case R.id.nav_MyDocu_Super_Admin:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_super_admin,
-                        new MyDocument()).commit();
+            case R.id.nav_Accepted:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Accepted()).commit();
                 break;
 
-            case R.id.nav_InActive_Super_Admin:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_super_admin,
+            case R.id.nav_MyDocu:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new MyDocument()).commit();
+                break;
+            case R.id.nav_Received:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Received()).commit();
+                break;
+
+            case R.id.nav_InActive:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new InActive()).commit();
                 break;
 
-            case R.id.nav_Archive_Super_Admin:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_super_admin,
+            case R.id.nav_Archive:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new Archive()).commit();
                 break;
 
-            case R.id.nav_ScanQR_Super_Admin:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_super_admin,
+            case R.id.nav_ScanQR:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ScanQR()).commit();
                 break;
 
-            case R.id.nav_About_Super_Admin:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_super_admin,
+            case R.id.nav_About:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new About()).commit();
                 break;
 
-            case R.id.nav_Logout_Super_Admin:
+            case R.id.nav_Logout:
                 Toast.makeText(this, "Logged out!", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(this, Login.class);
                 startActivity(i);

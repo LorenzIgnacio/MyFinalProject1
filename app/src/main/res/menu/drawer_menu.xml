@@ -7,32 +7,45 @@
 
 
         <item
-            android:id="@+id/nav_AllDocu_Super_Admin"
+            android:id="@+id/nav_AllDocu"
             android:icon="@drawable/baseline_folder_24"
             android:iconTint="@color/colorPrimary"
             android:title="All Documents" />
 
         <item
-            android:id="@+id/nav_MyDocu_Super_Admin"
+            android:id="@+id/nav_Accepted"
+            android:icon="@drawable/baseline_inbox_24"
+            android:iconTint="@color/colorPrimary"
+            android:title="Accepted" />
+
+
+        <item
+            android:id="@+id/nav_MyDocu"
             android:icon="@drawable/baseline_inbox_24"
             android:iconTint="@color/colorPrimary"
             android:title="My Document" />
 
+        <item
+            android:id="@+id/nav_Received"
+            android:icon="@drawable/baseline_inbox_24"
+            android:iconTint="@color/colorPrimary"
+            android:title="Received" />
+
 
         <item
-            android:id="@+id/nav_InActive_Super_Admin"
+            android:id="@+id/nav_InActive"
             android:icon="@drawable/baseline_arrow_forward_24"
             android:iconTint="@color/colorPrimary"
-            android:title="In Active" />
+            android:title="Inactive" />
 
         <item
-            android:id="@+id/nav_Archive_Super_Admin"
+            android:id="@+id/nav_Archive"
             android:icon="@drawable/baseline_archive_24"
             android:iconTint="@color/colorPrimary"
             android:title="Archive" />
 
         <item
-            android:id="@+id/nav_ScanQR_Super_Admin"
+            android:id="@+id/nav_ScanQR"
             android:icon="@drawable/baseline_group_24"
             android:iconTint="@color/colorPrimary"
             android:title="Scan QR Code" />
@@ -43,13 +56,13 @@
     <item android:title="Extras">
         <menu>
             <item
-                android:id="@+id/nav_About_Super_Admin"
+                android:id="@+id/nav_About"
                 android:icon="@drawable/baseline_business_24"
                 android:iconTint="@color/colorPrimary"
                 android:title="About The Company" />
 
             <item
-                android:id="@+id/nav_Logout_Super_Admin"
+                android:id="@+id/nav_Logout"
                 android:icon="@drawable/baseline_power_settings_new_24"
                 android:title="Logout" />
         </menu>

@@ -47,13 +47,13 @@ public class Archive extends Fragment {
                         return "" + item.subject;
                     }
                 });
-
-                dict.addStringField(R.id.textStatus, new StringExtractor<ClassListItems>() {
+                dict.addStringField(R.id.textCreator, new StringExtractor<ClassListItems>() {
                     @Override
                     public String getStringValue(ClassListItems item, int position) {
-                        return "" + item.statuscode_id;
+                        return "" + item.creator;
                     }
                 });
+
                 dict.addStringField(R.id.textDate, new StringExtractor<ClassListItems>() {
                     @Override
                     public String getStringValue(ClassListItems item, int position) {
@@ -62,11 +62,13 @@ public class Archive extends Fragment {
                 });
                 adapter = new FunDapter<ClassListItems>(getActivity(), userList, R.layout.fragment_archive_list, dict);
                 listView.setAdapter(adapter);
+
             }
         });
 
 
-        taskRead.execute("http://10.0.2.2:80/android/archive.php");
+        taskRead.execute("http://10.0.227.97/android/archive.php");
+        /*taskRead.execute("http://10.0.227.97/android/received.php");*/
         return view;
     }
 }

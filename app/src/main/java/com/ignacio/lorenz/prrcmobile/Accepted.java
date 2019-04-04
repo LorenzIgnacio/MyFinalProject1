@@ -1,5 +1,8 @@
 package com.ignacio.lorenz.prrcmobile;
+
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -19,7 +22,8 @@ import com.kosalgeek.asynctask.PostResponseAsyncTask;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MyDocument extends Fragment {
+
+public class Accepted extends Fragment {
 
     private ArrayList<ClassListItems> userList;
     private ListView listView;
@@ -27,14 +31,14 @@ public class MyDocument extends Fragment {
     SharedPreferences sp;
 
 
-    public MyDocument() {
+    public Accepted() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_docu, container, false);
+        View view = inflater.inflate(R.layout.fragment_accepted, container, false);
         listView =(ListView)view.findViewById(R.id.listView);
 
         sp = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -62,20 +66,13 @@ public class MyDocument extends Fragment {
                         return "" + item.creator;
                     }
                 });
-
-                dict.addStringField(R.id.textStatus, new StringExtractor<ClassListItems>() {
-                    @Override
-                    public String getStringValue(ClassListItems item, int position) {
-                        return "" + item.statuscode_id;
-                    }
-                });
                 dict.addStringField(R.id.textDate, new StringExtractor<ClassListItems>() {
                     @Override
                     public String getStringValue(ClassListItems item, int position) {
                         return "" + item.final_action_date;
                     }
                 });
-                adapter = new FunDapter<ClassListItems>(getActivity(), userList, R.layout.fragment_my_docu_list, dict);
+                adapter = new FunDapter<ClassListItems>(getActivity(), userList, R.layout.fragment_accepted_list, dict);
                 listView.setAdapter(adapter);
             }
         });
@@ -87,3 +84,4 @@ public class MyDocument extends Fragment {
     }
 
 }
+

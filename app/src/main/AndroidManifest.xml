@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity_SuperAdmin"
+            android:name=".HomeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Login"
