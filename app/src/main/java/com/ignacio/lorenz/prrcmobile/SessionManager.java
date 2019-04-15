@@ -100,7 +100,19 @@ public class SessionManager {
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
         // user name
+        user.put(KEY_NAME, pref.getString(KEY_NAME, null));
+
+        //user username
         user.put(KEY_USERNAME, pref.getString(KEY_USERNAME, null));
+
+        //user id
+        user.put(KEY_ID, Integer.toString(pref.getInt(KEY_ID, 0)));
+
+        //user role
+        user.put(KEY_ROLE, Integer.toString(pref.getInt(KEY_ROLE, 0)));
+
+        //user department
+        user.put(KEY_DEPT, Integer.toString(pref.getInt(KEY_DEPT, 0)));
 
         // return user
         return user;

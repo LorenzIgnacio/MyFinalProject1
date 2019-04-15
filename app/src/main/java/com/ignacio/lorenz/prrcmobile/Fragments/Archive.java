@@ -27,7 +27,7 @@ import java.util.List;
 
 public class Archive extends Fragment {
 
-    private String url = "http://192.168.1.16/PRRC-Dtracking/public/api/archived";
+    private String url = "http://192.168.1.16/PRRC-Dtracking/public/api/archive";
 
     private static final String KEY_STATUS = "status";
     private static final String KEY_USERNAME = "username";
@@ -72,11 +72,12 @@ public class Archive extends Fragment {
                             new int[] {R.id.status, R.id.username, R.id.reference_number, R.id.final_action_date, R.id.subject});
 
                     lv.setAdapter(adapter);
+//                    Toast.makeText(getContext(), "Loaded new data", Toast.LENGTH_SHORT).show();
                 }
                 catch(JSONException e){
                     Toast.makeText(getContext(), "Error : " + e.toString(), Toast.LENGTH_LONG).show();
                 }
-                Toast.makeText(getContext(), "Loaded new data", Toast.LENGTH_SHORT).show();
+
             }
 
         }, new Response.ErrorListener() {

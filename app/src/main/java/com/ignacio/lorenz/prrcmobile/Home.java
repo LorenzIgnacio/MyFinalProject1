@@ -13,6 +13,8 @@ public class Home extends AppCompatActivity {
     private ViewPager vp;
     private TabLayout tabs;
 
+    SessionManager session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,9 @@ public class Home extends AppCompatActivity {
 
         vp = (ViewPager) findViewById(R.id.viewpager);
         tabs = (TabLayout) findViewById(R.id.tabs);
+
+        session = new SessionManager(getApplicationContext());
+        session.checkLogin();
     }
 
     @Override

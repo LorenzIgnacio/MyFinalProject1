@@ -71,11 +71,11 @@ public class AllDocument extends Fragment {
                             new int[] {R.id.status, R.id.username, R.id.reference_number, R.id.final_action_date, R.id.subject});
 
                     lv.setAdapter(adapter);
+//                    Toast.makeText(getContext(), "Loaded new data", Toast.LENGTH_SHORT).show();
                 }
                 catch(JSONException e){
                     Toast.makeText(getContext(), "Error : " + e.toString(), Toast.LENGTH_LONG).show();
                 }
-                Toast.makeText(getContext(), "Loaded new data", Toast.LENGTH_SHORT).show();
             }
 
         }, new Response.ErrorListener() {
