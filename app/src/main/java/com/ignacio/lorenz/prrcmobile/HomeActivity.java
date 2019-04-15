@@ -1,6 +1,8 @@
 package com.ignacio.lorenz.prrcmobile;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -8,11 +10,17 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.ignacio.lorenz.prrcmobile.Fragments.Accepted;
+import com.ignacio.lorenz.prrcmobile.Fragments.AllDocument;
+import com.ignacio.lorenz.prrcmobile.Fragments.Archive;
+import com.ignacio.lorenz.prrcmobile.Fragments.InActive;
+import com.ignacio.lorenz.prrcmobile.Fragments.MyDocument;
+import com.ignacio.lorenz.prrcmobile.Fragments.Received;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer_super_admin;
