@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.ignacio.lorenz.prrcmobile.Home">
+    <item android:id="@+id/qr"
+        android:icon="@drawable/ic_scanner"
+        android:title="QR Scan"
+        android:showAsAction="ifRoom"/>
+    <item android:id="@+id/logout"
+        android:icon="@drawable/baseline_power_settings_new_24"
+        android:title="Logout"
+        android:showAsAction="ifRoom"/>
+</menu>
