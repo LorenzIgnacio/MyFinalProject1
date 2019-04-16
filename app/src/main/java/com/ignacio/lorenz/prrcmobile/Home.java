@@ -1,5 +1,6 @@
 package com.ignacio.lorenz.prrcmobile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -7,9 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.ignacio.lorenz.prrcmobile.Adapter.ViewpagerAdapter;
+import com.ignacio.lorenz.prrcmobile.QRScanner.Scanner;
 
 public class Home extends AppCompatActivity {
 
@@ -52,7 +53,9 @@ public class Home extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.qr:
-                Toast.makeText(getApplicationContext(), "QR", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "QR", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Home.this, Scanner.class);
+                startActivity(intent);
                 return true;
             case R.id.logout:
                 session.logoutUser();
