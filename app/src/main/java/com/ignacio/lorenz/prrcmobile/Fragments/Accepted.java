@@ -3,20 +3,21 @@ package com.ignacio.lorenz.prrcmobile.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.ignacio.lorenz.prrcmobile.Adapter.RecyclerViewAdapter;
 import com.ignacio.lorenz.prrcmobile.R;
 import com.ignacio.lorenz.prrcmobile.Singleton_Volley_Request;
+import com.ignacio.lorenz.prrcmobile.URLMaker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Accepted extends Fragment {
-    private String url = "http://192.168.1.16/PRRC-Dtracking/public/api/accept";
+    private String url = new URLMaker("accept").getUrl();
 
     private static final String KEY_STATUS = "status";
     private static final String KEY_USERNAME = "username";
@@ -34,22 +35,19 @@ public class Accepted extends Fragment {
     private static final String KEY_DATE = "final_action_date";
     private static final String KEY_SUBJECT = "subject";
 
-    private ListAdapter adapter;
-
     private List<HashMap<String, String>> accepted_docus = new ArrayList<>();
 
     public Accepted() {
 
     }
 
-    ListView lv;
-
+    RecyclerView rv;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_accepted, container, false);
-        lv = (ListView) view.findViewById(R.id.listView);
+        View view = inflater.inflate(R.layout.recycler_view_docu, container, false);
+        rv = view.findViewById(R.id.recycle_view_all_docu);
         accepted_docus.clear();
 
         JsonArrayRequest acceptDocu = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -66,11 +64,8 @@ public class Accepted extends Fragment {
 
                         accepted_docus.add(map);
                     }
-                    adapter = new SimpleAdapter(getActivity(), accepted_docus, R.layout.fragment_accepted_list,
-                            new String[] {KEY_STATUS, KEY_USERNAME, KEY_REF, KEY_DATE, KEY_SUBJECT},
-                            new int[] {R.id.status, R.id.username, R.id.reference_number, R.id.final_action_date, R.id.subject});
-
-                    lv.setAdapter(adapter);
+                    rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv.setAdapter(new RecyclerViewAdapter(getContext(), R.layout.card_view_docu, accepted_docus));
                 }
                 catch (JSONException e){
                     Toast.makeText(getContext(), "Error : " + e.toString(), Toast.LENGTH_LONG).show();

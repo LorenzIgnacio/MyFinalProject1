@@ -3,20 +3,21 @@ package com.ignacio.lorenz.prrcmobile.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.ignacio.lorenz.prrcmobile.Adapter.RecyclerViewAdapter;
 import com.ignacio.lorenz.prrcmobile.R;
 import com.ignacio.lorenz.prrcmobile.Singleton_Volley_Request;
+import com.ignacio.lorenz.prrcmobile.URLMaker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,15 +28,13 @@ import java.util.List;
 
 public class InActive extends Fragment {
 
-    private String url = "http://192.168.1.16/PRRC-Dtracking/public/api/inactive";
+    private String url = new URLMaker("inactive").getUrl();
 
     private static final String KEY_STATUS = "status";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_REF = "reference_number";
     private static final String KEY_DATE = "final_action_date";
     private static final String KEY_SUBJECT = "subject";
-
-    private ListAdapter adapter;
 
     private List<HashMap<String, String>> inactive_docus = new ArrayList<>();
 
@@ -44,13 +43,13 @@ public class InActive extends Fragment {
 
     }
 
-    ListView lv;
+    RecyclerView rv;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_inactive, container, false);
-        lv = (ListView) view.findViewById(R.id.listView);
+        View view = inflater.inflate(R.layout.recycler_view_docu, container, false);
+        rv = view.findViewById(R.id.recycle_view_all_docu);
         inactive_docus.clear();
 
         JsonArrayRequest inactive = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -67,12 +66,8 @@ public class InActive extends Fragment {
 
                         inactive_docus.add(map);
                     }
-                    adapter = new SimpleAdapter(getActivity(), inactive_docus, R.layout.fragment_inactive_list,
-                            new String[] {KEY_STATUS, KEY_USERNAME, KEY_REF, KEY_DATE, KEY_SUBJECT},
-                            new int[] {R.id.status, R.id.username, R.id.reference_number, R.id.final_action_date, R.id.subject});
-
-                    lv.setAdapter(adapter);
-//                    Toast.makeText(getContext(), "Loaded new data", Toast.LENGTH_SHORT).show();
+                    rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv.setAdapter(new RecyclerViewAdapter(getContext(), R.layout.card_view_docu, inactive_docus));
                 }
                 catch(JSONException e){
                     Toast.makeText(getContext(), "Error : " + e.toString(), Toast.LENGTH_LONG).show();

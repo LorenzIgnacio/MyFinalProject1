@@ -10,4 +10,10 @@
         android:icon="@drawable/baseline_power_settings_new_24"
         android:title="Logout"
         android:showAsAction="ifRoom"/>
+    <!--<item android:id="@+id/searchBar"-->
+        <!--android:icon="@android:drawable/ic_menu_search"-->
+        <!--app:actionViewClass="android.widget.SearchView"-->
+        <!--app:showAsAction="always"-->
+        <!--android:title="Search"-->
+        <!--/>-->
 </menu>

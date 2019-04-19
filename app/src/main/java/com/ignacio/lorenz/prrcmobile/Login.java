@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity {
     EditText et_password;
 
     SessionManager session;
+    String url;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,7 @@ public class Login extends AppCompatActivity {
         et_password = findViewById(R.id.etPassword);
         btn_login = findViewById(R.id.btnLogin);
         session = new SessionManager(getApplicationContext());
+        url = new URLMaker("mobile_login").getUrl();
 
         btn_login.setOnClickListener(new View.OnClickListener(){
 
@@ -41,8 +43,6 @@ public class Login extends AppCompatActivity {
                 btn_login.setAlpha(.5f);
                 btn_login.setClickable(false);
                 try{
-                    //url depends on ipv4 ip address you have
-                    String url = "http://192.168.1.16/PRRC-Dtracking/public/api/mobile_login";
                     final JSONObject jsonBody = new JSONObject();
 
                     jsonBody.put("username", et_username.getText().toString());
