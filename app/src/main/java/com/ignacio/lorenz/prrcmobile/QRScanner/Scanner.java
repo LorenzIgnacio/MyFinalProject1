@@ -1,9 +1,7 @@
 package com.ignacio.lorenz.prrcmobile.QRScanner;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -12,7 +10,16 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.zxing.Result;
+import com.ignacio.lorenz.prrcmobile.Singleton_Volley_Request;
+import com.ignacio.lorenz.prrcmobile.URLMaker;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -22,6 +29,7 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
 
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView scannerView;
+    private String url = new URLMaker("qr_details").getUrl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +122,39 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
     @Override
     public void handleResult(Result rawResult) {
         final String scanResult = rawResult.getText();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        final JSONObject param_ref_num = new JSONObject();
+
+        try{
+            param_ref_num.put("reference_number", scanResult);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest docu_details = new JsonObjectRequest(Request.Method.POST, url, param_ref_num, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                AlertDialog.Builder builder_response = docu_found(scanResult);
+                AlertDialog alert = builder_response.create();
+                alert.show();
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AlertDialog.Builder builder_error =  docu_not_found();
+                AlertDialog alert = builder_error.create();
+                alert.show();
+            }
+        });
+
+        Singleton_Volley_Request.getInstance(getApplicationContext()).addToRequestQueue(docu_details);
+
+    }
+
+    public AlertDialog.Builder docu_found(String scanResult){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Scanner.this);
         builder.setTitle("Scan Result");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -125,12 +165,25 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
         builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(scanResult));
-                startActivity(intent);
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(scanResult));
+//                startActivity(intent);
+                Toast.makeText(Scanner.this, "TODO to show", Toast.LENGTH_SHORT).show();
+                scannerView.resumeCameraPreview(Scanner.this);
             }
         });
-        builder.setMessage(scanResult);
-        AlertDialog alert = builder.create();
-        alert.show();
+        builder.setMessage("Document " + scanResult + " found!");
+        return builder;
+    }
+
+    public AlertDialog.Builder docu_not_found(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Scanner.this);
+        builder.setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                scannerView.resumeCameraPreview(Scanner.this);
+            }
+        });
+        builder.setMessage("No document found");
+        return builder;
     }
 }
