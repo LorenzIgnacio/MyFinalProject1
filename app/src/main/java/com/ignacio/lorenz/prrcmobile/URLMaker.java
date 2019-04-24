@@ -1,7 +1,7 @@
 package com.ignacio.lorenz.prrcmobile;
 
 public class URLMaker {
-    private String url = "http://192.168.1.11/PRRC-Dtracking/public/api/";
+    private String url = "http://192.168.1.9/prrc/public/api/";
 
     public URLMaker(String added_url){
         url = url.concat(added_url);
