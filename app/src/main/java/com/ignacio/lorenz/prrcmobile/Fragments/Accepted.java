@@ -3,6 +3,7 @@ package com.ignacio.lorenz.prrcmobile.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -37,6 +38,8 @@ public class Accepted extends Fragment {
 
     private List<HashMap<String, String>> accepted_docus = new ArrayList<>();
 
+    SwipeRefreshLayout swiper;
+
     public Accepted() {
 
     }
@@ -50,6 +53,23 @@ public class Accepted extends Fragment {
         rv = view.findViewById(R.id.recycle_view_all_docu);
         accepted_docus.clear();
 
+        swiper = view.findViewById(R.id.refresher);
+
+        swiper.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                accepted_docus.clear();
+                getJSONData();
+                swiper.setRefreshing(false);
+            }
+        });
+
+        getJSONData();
+
+        return view;
+    }
+
+    public void getJSONData(){
         JsonArrayRequest acceptDocu = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -80,8 +100,6 @@ public class Accepted extends Fragment {
         });
 
         Singleton_Volley_Request.getInstance(getContext()).addToRequestQueue(acceptDocu);
-
-        return view;
     }
 
 }
