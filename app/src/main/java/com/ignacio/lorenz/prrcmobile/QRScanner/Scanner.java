@@ -1,6 +1,7 @@
 package com.ignacio.lorenz.prrcmobile.QRScanner;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.zxing.Result;
+import com.ignacio.lorenz.prrcmobile.Document.ShowActivity;
 import com.ignacio.lorenz.prrcmobile.Singleton_Volley_Request;
 import com.ignacio.lorenz.prrcmobile.URLMaker;
 
@@ -153,7 +155,7 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
 
     }
 
-    public AlertDialog.Builder docu_found(String scanResult){
+    public AlertDialog.Builder docu_found(final String scanResult){
         AlertDialog.Builder builder = new AlertDialog.Builder(Scanner.this);
         builder.setTitle("Scan Result");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -165,10 +167,11 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
         builder.setNeutralButton("Visit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(scanResult));
-//                startActivity(intent);
-                Toast.makeText(Scanner.this, "TODO to show", Toast.LENGTH_SHORT).show();
-                scannerView.resumeCameraPreview(Scanner.this);
+                Intent intent = new Intent(Scanner.this, ShowActivity.class);
+                intent.putExtra("reference_number", scanResult);
+                startActivity(intent);
+//                Toast.makeText(Scanner.this, "TODO to show", Toast.LENGTH_SHORT).show();
+//                scannerView.resumeCameraPreview(Scanner.this);
             }
         });
         builder.setMessage("Document " + scanResult + " found!");

@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.ClientError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
@@ -103,6 +104,11 @@ public class Login extends AppCompatActivity {
                             }
 
                     );
+
+                    jsonFromUrl.setRetryPolicy(new DefaultRetryPolicy(5000,
+                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
                     Singleton_Volley_Request.getInstance(getApplicationContext()).addToRequestQueue(jsonFromUrl);
                 }
                 catch(JSONException e){

@@ -13,9 +13,6 @@ import com.ignacio.lorenz.prrcmobile.Fragments.Received;
 
 public class ViewpagerAdapter extends FragmentPagerAdapter {
 
-    int num;
-    FragmentManager fmngr;
-
     public ViewpagerAdapter(FragmentManager fm){
         super(fm);
     }
