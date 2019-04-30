@@ -27,7 +27,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(ctext);
-        return new RecyclerViewHolder(inflater, viewGroup, layout_resource);
+        return new RecyclerViewHolder(inflater, viewGroup, layout_resource, ctext);
     }
 
     @Override
