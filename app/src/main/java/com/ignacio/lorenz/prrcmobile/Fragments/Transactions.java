@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,10 +33,17 @@ public class Transactions extends Fragment {
 
     private String url = new URLMaker("show").getUrl();
 
-    private static final String KEY_FROM = "from";
-    private static final String KEY_TO = "to";
+    private static final String KEY_FROM = "in_charge";
+    private static final String KEY_TO = "recipient";
+    private static final String KEY_FROM_LOC = "location";
+    private static final String KEY_TO_LOC = "route";
+    private static final String KEY_REMARKS = "remarks";
     private static final String KEY_DATE_DEADLINE = "date_deadline";
     private static final String KEY_HAS_RECEIVED = "has_received";
+    private static final String KEY_RECEIVED_DATE = "received_at";
+    private static final String KEY_HAS_COMPLIED = "has_sent";
+    private static final String KEY_COMPLIED_DATE = "sent_at";
+    private static final String KEY_CREATED_DATE = "created_at";
 
     private List<HashMap<String, String>> transaction_lists = new ArrayList<>();
 
@@ -45,7 +53,7 @@ public class Transactions extends Fragment {
     Bundle info;
     JSONObject post_details;
 
-
+    SwipeRefreshLayout swiper;
 
     @Nullable
     @Override
@@ -53,6 +61,16 @@ public class Transactions extends Fragment {
         View view = inflater.inflate(R.layout.transactions, container, false);
 
         rv = view.findViewById(R.id.recycle_view_transaction_details);
+        swiper = view.findViewById(R.id.transaction_details_refresher);
+
+        swiper.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                transaction_lists.clear();
+                getTransactionDetails();
+                swiper.setRefreshing(false);
+            }
+        });
 
         getTransactionDetails();
 
@@ -99,14 +117,26 @@ public class Transactions extends Fragment {
         for(int i=0; i < data.length(); i++){
             HashMap<String, String> map = new HashMap<>();
             try {
-                map.put(KEY_FROM, data.getJSONObject(i).getString("in_charge"));
-                map.put(KEY_TO, data.getJSONObject(i).getString("recipient"));
-                map.put(KEY_DATE_DEADLINE, data.getJSONObject(i).getString("date_deadline"));
+                map.put(KEY_FROM, data.getJSONObject(i).getString(KEY_FROM));
+                map.put(KEY_TO, data.getJSONObject(i).getString(KEY_TO));
+                map.put(KEY_FROM_LOC, data.getJSONObject(i).getString(KEY_FROM_LOC));
+                map.put(KEY_TO_LOC, data.getJSONObject(i).getString(KEY_TO_LOC));
+                map.put(KEY_REMARKS, data.getJSONObject(i).getString(KEY_REMARKS));
+                map.put(KEY_DATE_DEADLINE, data.getJSONObject(i).getString(KEY_DATE_DEADLINE));
+                map.put(KEY_CREATED_DATE, data.getJSONObject(i).getString(KEY_CREATED_DATE));
                 if(data.getJSONObject(i).getInt("is_received") == 1){
                     map.put(KEY_HAS_RECEIVED, "Yes");
+                    map.put(KEY_RECEIVED_DATE, data.getJSONObject(i).getString(KEY_RECEIVED_DATE));
                 }
                 else{
                     map.put(KEY_HAS_RECEIVED, "No");
+                }
+                if(data.getJSONObject(i).getInt("has_sent") == 1){
+                    map.put(KEY_HAS_COMPLIED, "Yes");
+                    map.put(KEY_COMPLIED_DATE, data.getJSONObject(i).getString(KEY_COMPLIED_DATE));
+                }
+                else{
+                    map.put(KEY_HAS_COMPLIED, "No");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
