@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Document.ShowActivity"></activity>
+        <activity android:name=".ForgetPassword"></activity>
+        <activity android:name=".Document.ShowActivity" />
         <activity android:name=".QRScanner.Scanner" />
         <activity android:name=".Home" />
         <activity

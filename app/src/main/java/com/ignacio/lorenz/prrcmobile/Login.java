@@ -118,4 +118,9 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+    public void OnClick_ForgotPass(View V){
+        Intent i = new Intent(Login.this, ForgetPassword.class);
+
+        startActivity(i);
+    }
 }
