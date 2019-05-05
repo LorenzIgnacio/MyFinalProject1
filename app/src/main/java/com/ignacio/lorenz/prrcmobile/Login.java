@@ -28,15 +28,22 @@ public class Login extends AppCompatActivity {
     SessionManager session;
     String url;
 
+    Bundle req_accept;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         et_username = findViewById(R.id.etUsername);
         et_password = findViewById(R.id.etPassword);
-        btn_login = findViewById(R.id.btnLogin);
+        btn_login = findViewById(R.id.btnReq);
         session = new SessionManager(getApplicationContext());
         url = new URLMaker("mobile_login").getUrl();
+
+        req_accept = getIntent().getExtras();
+        if(req_accept != null){
+            Toast.makeText(getApplicationContext(), "Error: " + req_accept.getString("req_message"), Toast.LENGTH_LONG).show();
+        }
 
         btn_login.setOnClickListener(new View.OnClickListener(){
 
@@ -90,7 +97,19 @@ public class Login extends AppCompatActivity {
                                 public void onErrorResponse(VolleyError error) {
 
                                     if(error instanceof ClientError){
-                                        Toast.makeText(getApplicationContext(), "Error:  Invalid username/password", Toast.LENGTH_SHORT).show();
+                                        JSONObject body = null;
+                                        try {
+                                            body = new JSONObject(new String(error.networkResponse.data));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        try {
+                                            Toast.makeText(getApplicationContext(), "Error: " + body.getString("message") , Toast.LENGTH_SHORT).show();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
                                         btn_login.setAlpha(1f);
                                         btn_login.setClickable(true);
                                     }

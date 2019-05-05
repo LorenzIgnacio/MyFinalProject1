@@ -9,13 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ignacio.lorenz.prrcmobile.Adapter.ShowPagerAdapter;
+import com.ignacio.lorenz.prrcmobile.Home;
 import com.ignacio.lorenz.prrcmobile.QRScanner.Scanner;
 import com.ignacio.lorenz.prrcmobile.R;
 import com.ignacio.lorenz.prrcmobile.SessionManager;
@@ -63,14 +63,16 @@ public class ShowActivity extends AppCompatActivity {
 
         post_details = new JSONObject();
 
+        session = new SessionManager(getApplicationContext());
+        session.checkLogin();
+
         try {
             post_details.put("reference_number", ref_num);
+            post_details.put("userRoleID", session.getUserDetails().get("role"));
+            post_details.put("userID", session.getUserDetails().get("id"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        session = new SessionManager(getApplicationContext());
-        session.checkLogin();
     }
 
     @Override
@@ -129,8 +131,21 @@ public class ShowActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Error fetching record details...", Toast.LENGTH_LONG).show();
-                error.printStackTrace();
+                JSONObject body = null;
+                try {
+                    body = new JSONObject(new String(error.networkResponse.data));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+//                    Toast.makeText(getApplicationContext(), "Error fetching record details..." + body.getString("message"), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ShowActivity.this, Home.class);
+                    intent.putExtra("errorMsg", body.getString("message"));
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

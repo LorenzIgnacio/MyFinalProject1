@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp"
-    app:cardBackgroundColor="@color/card_background"
     app:cardCornerRadius="4dp"
-    app:cardElevation="8dp">
+    app:cardBackgroundColor="@color/card_background"
+    app:cardElevation="8dp"
+    app:cardMaxElevation="10dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,13 +26,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="right"
                 android:textColor="@color/colorPrimary" />
         </LinearLayout>
 
@@ -55,14 +59,17 @@
                 android:id="@+id/final_action_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <Button
             android:id="@+id/show_on_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Show" />
+            android:backgroundTint="@color/design_default_color_primary"
+            android:text="Show"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

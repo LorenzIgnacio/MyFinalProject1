@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -18,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ignacio.lorenz.prrcmobile.Adapter.RecyclerViewAdapterTransactions;
 import com.ignacio.lorenz.prrcmobile.R;
+import com.ignacio.lorenz.prrcmobile.SessionManager;
 import com.ignacio.lorenz.prrcmobile.Singleton_Volley_Request;
 import com.ignacio.lorenz.prrcmobile.URLMaker;
 
@@ -55,6 +55,8 @@ public class Transactions extends Fragment {
 
     SwipeRefreshLayout swiper;
 
+    SessionManager session;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,9 +83,14 @@ public class Transactions extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         info = getActivity().getIntent().getExtras();
         ref_num = info.getString("reference_number");
+        session = new SessionManager(getContext());
+        session.checkLogin();
+
         post_details = new JSONObject();
         try {
             post_details.put("reference_number", ref_num);
+            post_details.put("userRoleID", session.getUserDetails().get("role"));
+            post_details.put("userID", session.getUserDetails().get("id"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -105,8 +112,6 @@ public class Transactions extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "Error fetching record details...", Toast.LENGTH_LONG).show();
-                error.printStackTrace();
             }
         });
 

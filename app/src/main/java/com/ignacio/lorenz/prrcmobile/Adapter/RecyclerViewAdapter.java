@@ -1,6 +1,7 @@
 package com.ignacio.lorenz.prrcmobile.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import com.ignacio.lorenz.prrcmobile.RecyclerView.RecyclerViewHolder;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
@@ -35,6 +37,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         recyclerViewHolder.status.setText(docu_data.get(i).get("status"));
         recyclerViewHolder.username.setText(docu_data.get(i).get("username"));
         recyclerViewHolder.reference_number.setText(docu_data.get(i).get("reference_number"));
+        if(Integer.parseInt(Objects.requireNonNull(docu_data.get(i).get("is_rush"))) == 1){
+            recyclerViewHolder.reference_number.setTextColor(Color.parseColor("#e57373"));
+        }
+
         recyclerViewHolder.final_action_date.setText(docu_data.get(i).get("final_action_date"));
         recyclerViewHolder.subject.setText(docu_data.get(i).get("subject"));
 

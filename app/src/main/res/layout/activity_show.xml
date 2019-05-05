@@ -10,11 +10,13 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/design_default_color_primary_dark"
+        android:background="@color/navbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white">
+        app:titleTextColor="@color/navbar_text"
+        android:theme="@style/MyToolbarStyle"
+        app:popupTheme="@style/Theme.AppCompat.NoActionBar">
 
     </android.support.v7.widget.Toolbar>
 
@@ -25,7 +27,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
-        app:cardBackgroundColor="@color/design_default_color_primary_dark"
+        app:cardBackgroundColor="@color/accent"
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,21 +75,22 @@
         android:id="@+id/show_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header">
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Document Details" />
+            android:text="Docu Details" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Document Transaction" />
+            android:text="Docu Transaction" />
 
     </android.support.design.widget.TabLayout>
 

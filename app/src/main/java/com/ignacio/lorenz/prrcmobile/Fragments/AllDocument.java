@@ -35,6 +35,7 @@ public class AllDocument extends Fragment {
     private static final String KEY_REF = "reference_number";
     private static final String KEY_DATE = "final_action_date";
     private static final String KEY_SUBJECT = "subject";
+    private static final String KEY_RUSH = "is_rush";
 
     private List<HashMap<String, String>> all_docus = new ArrayList<>();
 
@@ -87,6 +88,7 @@ public class AllDocument extends Fragment {
                         map.put(KEY_USERNAME, response.getJSONObject(i).getString(KEY_USERNAME));
                         map.put(KEY_DATE, response.getJSONObject(i).getString(KEY_DATE));
                         map.put(KEY_STATUS, response.getJSONObject(i).getString(KEY_STATUS));
+                        map.put(KEY_RUSH, response.getJSONObject(i).getString(KEY_RUSH));
 
                         all_docus.add(map);
                     }

@@ -5,6 +5,12 @@
     <color name="colorAccent">#000000</color>
     <color name="colorbutton">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="card_background">#F1EAEA</color>
+    <color name="card_background">#fafafa</color>
     <color name="divider">#CEBBBB</color>
+    <color name="ligtish_blue">#2196f3</color>
+    <color name="navbar">#fefefe</color>
+    <color name="navbar_text">#000000</color>
+    <color name="accent">#00b8d4</color>
+    <color name="tabs_background">#eeeeee</color>
+    <color name="cyan">#4dd0e1</color>
 </resources>

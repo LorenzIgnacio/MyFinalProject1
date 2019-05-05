@@ -4,7 +4,6 @@
     android:layout_height="match_parent">
 
     <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/details_refresher"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,13 +15,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:layout_marginTop="15dp">
+
+                <View
+                    android:id="@+id/divider11"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/tabs_background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -30,9 +35,10 @@
                         android:layout_width="@dimen/details_title_width"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
+                        android:background="@color/cyan"
                         android:text="Document Type:"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -40,13 +46,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:textSize="15sp" />
+                        android:layout_marginLeft="7dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
+
                 </LinearLayout>
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/tabs_background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -54,178 +69,260 @@
                         android:layout_width="@dimen/details_title_width"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
+                        android:background="@color/cyan"
                         android:text="Rushed Document:"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/rush"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"/>
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="7dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
                 </LinearLayout>
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/tabs_background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView4"
                         android:layout_width="@dimen/details_title_width"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
+                        android:background="@color/cyan"
                         android:text="Source type:"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/source"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"/>
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="7dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
                 </LinearLayout>
+
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/tabs_background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView5"
                         android:layout_width="@dimen/details_title_width"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
+                        android:background="@color/cyan"
                         android:text="Creator of record:"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/creator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"/>
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="7dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
                 </LinearLayout>
+
+                <View
+                    android:id="@+id/divider5"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/tabs_background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView6"
                         android:layout_width="@dimen/details_title_width"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
+                        android:background="@color/cyan"
                         android:text="Confidentiality:"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/confidentiality"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"/>
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="7dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
                 </LinearLayout>
+
+                <View
+                    android:id="@+id/divider6"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/tabs_background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView7"
                         android:layout_width="@dimen/details_title_width"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
+                        android:background="@color/cyan"
                         android:text="Complexity:"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/complexity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"/>
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="7dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
                 </LinearLayout>
+
+                <View
+                    android:id="@+id/divider7"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/tabs_background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView8"
                         android:layout_width="@dimen/details_title_width"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="left"
+                        android:background="@color/cyan"
                         android:text="Sender Details:"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/sender_details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"/>
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="7dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
                 </LinearLayout>
+
+                <View
+                    android:id="@+id/divider8"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/tabs_background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="@dimen/details_title_width"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
+                        android:background="@color/cyan"
                         android:text="Final Action Date:"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/final_action_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"/>
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="7dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="italic" />
                 </LinearLayout>
+
+                <View
+                    android:id="@+id/divider9"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/tabs_background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView10"
                         android:layout_width="@dimen/details_title_width"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
+                        android:background="@color/cyan"
                         android:text="ISO Code:"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/iso"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"/>
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="7dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorPrimary" />
                 </LinearLayout>
+
+                <View
+                    android:id="@+id/divider10"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_weight="1"
+                    android:background="@color/tabs_background" />
 
             </LinearLayout>
         </ScrollView>

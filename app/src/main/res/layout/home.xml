@@ -10,33 +10,15 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/design_default_color_primary_dark"
+        android:background="@color/navbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white">
+        app:titleTextColor="@color/navbar_text"
+        android:theme="@style/MyToolbarStyle"
+        app:popupTheme="@style/Theme.AppCompat.NoActionBar">
 
     </android.support.v7.widget.Toolbar>
-
-    <!--<LinearLayout-->
-        <!--android:id="@+id/linearLayout"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/design_default_color_primary_dark"-->
-        <!--android:orientation="vertical"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent">-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/textView3"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center"-->
-            <!--android:text="PRRC"-->
-            <!--android:textSize="@android:dimen/app_icon_size"-->
-            <!--android:textColor="@color/white"/>-->
-    <!--</LinearLayout>-->
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
@@ -51,6 +33,7 @@
         android:id="@+id/tabs"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/tabs_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -58,38 +41,32 @@
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_home"
-            android:text="Home" />
+            android:icon="@drawable/ic_home" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_all"
-            android:text="All" />
+            android:icon="@drawable/ic_all" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_accept"
-            android:text="Accept" />
+            android:icon="@drawable/ic_accept" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_receive"
-            android:text="Receive" />
+            android:icon="@drawable/ic_receive" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_inactive"
-            android:text="Inactive" />
+            android:icon="@drawable/ic_inactive" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/ic_archive"
-            android:text="Archive" />
+            android:icon="@drawable/ic_archive" />
     </android.support.design.widget.TabLayout>
 
 </android.support.constraint.ConstraintLayout>
