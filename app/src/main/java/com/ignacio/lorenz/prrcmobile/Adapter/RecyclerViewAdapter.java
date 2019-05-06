@@ -15,9 +15,9 @@ import java.util.Objects;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
-    Context ctext;
-    int layout_resource;
-    List<HashMap<String, String>> docu_data;
+    private Context ctext;
+    private int layout_resource;
+    private List<HashMap<String, String>> docu_data;
 
     public RecyclerViewAdapter(Context context, int resource, List<HashMap<String, String>> docu_info){
         ctext = context;
@@ -49,5 +49,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @Override
     public int getItemCount() {
         return docu_data.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+//        return super.getItemId(position);
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+//        return super.getItemViewType(position);
+        return position;
     }
 }
