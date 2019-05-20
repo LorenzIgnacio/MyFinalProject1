@@ -61,7 +61,6 @@ public class Login extends AppCompatActivity {
 
 
                         public void onResponse(JSONObject response) {
-
                             if(response != null){
                                 try{
                                     if(response.getInt("is_disabled") == 0){
@@ -124,7 +123,7 @@ public class Login extends AppCompatActivity {
 
                     );
 
-                    jsonFromUrl.setRetryPolicy(new DefaultRetryPolicy(5000,
+                    jsonFromUrl.setRetryPolicy(new DefaultRetryPolicy(10000,
                             DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                             DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 

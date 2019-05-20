@@ -6,9 +6,11 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ignacio.lorenz.prrcmobile.Adapter.ViewpagerAdapter;
@@ -23,6 +25,8 @@ public class Home extends AppCompatActivity {
 
     SessionManager session;
 
+    TextView title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +37,9 @@ public class Home extends AppCompatActivity {
 
         adapt = new ViewpagerAdapter(getSupportFragmentManager());
 
-        vp = (ViewPager) findViewById(R.id.viewpager);
-        tabs = (TabLayout) findViewById(R.id.tabs);
+        vp = findViewById(R.id.viewpager);
+        tabs = findViewById(R.id.tabs);
+        title = findViewById(R.id.home_title);
 
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
@@ -49,6 +54,7 @@ public class Home extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         viewFragment();
+        title.setText("All Documents");
     }
 
     @Override
@@ -78,64 +84,96 @@ public class Home extends AppCompatActivity {
         vp.setAdapter(adapt);
         tabs.setupWithViewPager(vp);
         tabs.getTabAt(0).setIcon(R.drawable.ic_home);
-        View tab1 = tabs.getTabAt(0).view;
-        tab1.setOnLongClickListener(new View.OnLongClickListener() {
+
+        vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(getApplicationContext(), "All Documents", Toast.LENGTH_SHORT).show();
-                return false;
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                switch(i){
+                    case 0 :
+                        title.setText("All Documents");
+                        break;
+                    case 1:
+                        title.setText("My Documents");
+                        break;
+                    case 2:
+                        title.setText("Accepted Documents");
+                        break;
+                    case 3:
+                        title.setText("Received Documents");
+                        break;
+                    case 4:
+                        title.setText("Inactive Documents");
+                        break;
+                    case 5:
+                        title.setText("Archived Documents");
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+        View tab1 = tabs.getTabAt(0).view;
+        tab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                title.setText("All Documents");
             }
         });
 
         tabs.getTabAt(1).setIcon(R.drawable.ic_all);
         View tab2 = tabs.getTabAt(1).view;
-        tab2.setOnLongClickListener(new View.OnLongClickListener() {
+        tab2.setOnDragListener(new View.OnDragListener() {
             @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(getApplicationContext(), "My Documents", Toast.LENGTH_SHORT).show();
+            public boolean onDrag(View v, DragEvent event) {
+                title.setText("My Documents");
                 return false;
             }
         });
 
         tabs.getTabAt(2).setIcon(R.drawable.ic_accept);
         View tab3 = tabs.getTabAt(2).view;
-        tab3.setOnLongClickListener(new View.OnLongClickListener() {
+        tab3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(getApplicationContext(), "Accepted Documents", Toast.LENGTH_SHORT).show();
-                return false;
+            public void onClick(View v) {
+                title.setText("Accepted Documents");
             }
         });
 
         tabs.getTabAt(3).setIcon(R.drawable.ic_receive);
         View tab4 = tabs.getTabAt(3).view;
-        tab4.setOnLongClickListener(new View.OnLongClickListener() {
+        tab4.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(getApplicationContext(), "Received Documents", Toast.LENGTH_SHORT).show();
-                return false;
+            public void onClick(View v) {
+                title.setText("Received Documents");
             }
         });
 
-
         tabs.getTabAt(4).setIcon(R.drawable.ic_inactive);
         View tab5 = tabs.getTabAt(4).view;
-        tab5.setOnLongClickListener(new View.OnLongClickListener() {
+        tab5.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(getApplicationContext(), "Inactive Documents", Toast.LENGTH_SHORT).show();
-                return false;
+            public void onClick(View v) {
+                title.setText("Inactive Documents");
             }
         });
 
         tabs.getTabAt(5).setIcon(R.drawable.ic_archive);
         View tab6 = tabs.getTabAt(5).view;
-        tab6.setOnLongClickListener(new View.OnLongClickListener() {
+        tab6.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(getApplicationContext(), "Archived Documents", Toast.LENGTH_SHORT).show();
-                return false;
+            public void onClick(View v) {
+                title.setText("Archived Documents");
             }
         });
+
     }
 }
